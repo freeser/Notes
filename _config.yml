@@ -3,19 +3,74 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
+title: 迷途
+subtitle: 雾隐寻归路，叠嶂道无影
+description: 个人博客，写一些工作常用的小工具，备份一些代码...
+author: Freeser
+language: zh-Hans
 timezone:
+
+# custom Site settings
+# more detail check out docs
+SEOTitle: Freeser's blog 
+header-img: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg
+email: freeser@126.com
+keyword: js css html vue angular jquery nodejs # seo key words
+
+favicon: # your favicon png
+# custom end
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://liufeize.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+
+# SNS settings
+# RSS:
+weibo_username: freeser
+zhihu_username: freeser
+github_username: freeser
+twitter_username: 
+facebook_username:  
+linkedin_username:  
+
+# Build settings
+anchorjs: false                        # if you want to customize anchor. check out line:181 of `post.html`
+
+# Disqus settings 
+disqus_username: 
+
+# Duoshuo settings
+duoshuo_username:  # 你的多说帐号
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+# Use livere
+use_livere:
+
+# Analytics settings
+# Baidu Analytics
+ba_track_id:
+# Google Analytics
+ga_track_id:             # Format: UA-xxxxxx-xx
+ga_domain:
+
+# Sidebar settings
+# Sidebar settings
+sidebar: true
+sidebar-about-description: "求知若饥 虚心若愚" # 个人描述
+sidebar-avatar: http://owz81uqpo.bkt.clouddn.com/20150131_154827000_iOS.jpg    # use absolute URL
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+# friends
+friends:  # 友链
+
 
 # Directory
 source_dir: source
@@ -42,7 +97,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -51,7 +106,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -69,12 +124,44 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+markdown:
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-emoji
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:freeser/freeser.github.io.git
+
+
+# img CDN path
+cdn-url: owz81uqpo.bkt.clouddn.com # 你的CDN地址
+
+# Qiniu imageView2 API
+# More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
+clip-content: "?imageView2/1/w/1400/h/400/interlace/1/q/90"
+clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
+clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
+
+# post default images
+post-default-img: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg #博文默认的图片
+post-default-img-mobile: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg #移动端显示的图片
+
+# search api , set your custom key
+swiftype_key: 
+
+# archive page title 
+archive:
+    title: archives
+    description: 可以根据归档日期检索所有文件
