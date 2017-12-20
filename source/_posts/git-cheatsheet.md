@@ -5,6 +5,7 @@ tags: [git]
 categories: [文档留存]
 ---
 Git的官方网站：http://git-scm.com
+Pro Git book: https://git-scm.com/book/zh/v2
 
 <!-- more -->
 
