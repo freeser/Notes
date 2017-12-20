@@ -27,6 +27,8 @@ $ npm install
 
 ## 配置
 
+> 发布到github之前您必须先在 `_config.yml` 中修改参数，一个正确的部署配置中至少要有 type 参数如下：
+
 ```
 url: http://liufeize.com
 
@@ -34,7 +36,9 @@ deploy:
   type: git
   repo: git@github.com:*****/*****.github.io.git
 ```
+> 以上配置依赖` hexo-deployer-git`。`$ npm install hexo-deployer-git --save`
 
+更多信息: [部署](https://hexo.io/zh-cn/docs/deployment.html)
 
 ## 快速开始
 
