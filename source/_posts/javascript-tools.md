@@ -879,6 +879,33 @@ function formatRemainTime(endTime) {
 }
 {% endcodeblock %}
 
+### Format
+```js
+/**
+ * 
+ * @desc 将日期格式化成特定格式
+ * @param  {String} fmt 格式如'yyyy-MM-dd'
+ * @return {String}
+ */
+Date.prototype.Format = function (fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+```
+
 ## Url
 
 ### parseQueryString
@@ -950,193 +977,241 @@ function stringfyQueryString(obj) {
 ### throttle
 
 {% codeblock lang:js %}
-/**
- * @desc   函数节流。
- * 适用于限制`resize`和`scroll`等函数的调用频率
- *
- * @param  {Number}    delay          0 或者更大的毫秒数。 对于事件回调，大约100或250毫秒（或更高）的延迟是最有用的。
- * @param  {Boolean}   noTrailing     可选，默认为false。
- *                                    如果noTrailing为true，当节流函数被调用，每过`delay`毫秒`callback`也将执行一次。
- *                                    如果noTrailing为false或者未传入，`callback`将在最后一次调用节流函数后再执行一次.
- *                                    （延迟`delay`毫秒之后，节流函数没有被调用,内部计数器会复位）
- * @param  {Function}  callback       延迟毫秒后执行的函数。`this`上下文和所有参数都是按原样传递的，
- *                                    执行去节流功能时，调用`callback`。
- * @param  {Boolean}   debounceMode   如果`debounceMode`为true，`clear`在`delay`ms后执行。
- *                                    如果debounceMode是false，`callback`在`delay` ms之后执行。
- *
- * @return {Function}  新的节流函数
- */
-function throttle(delay, noTrailing, callback, debounceMode) {
+    /**
+    * @desc   函数节流。
+    * 适用于限制`resize`和`scroll`等函数的调用频率
+    *
+    * @param  {Number}    delay          0 或者更大的毫秒数。 对于事件回调，大约100或250毫秒（或更高）的延迟是最有用的。
+    * @param  {Boolean}   noTrailing     可选，默认为false。
+    *                                    如果noTrailing为true，当节流函数被调用，每过`delay`毫秒`callback`也将执行一次。
+    *                                    如果noTrailing为false或者未传入，`callback`将在最后一次调用节流函数后再执行一次.
+    *                                    （延迟`delay`毫秒之后，节流函数没有被调用,内部计数器会复位）
+    * @param  {Function}  callback       延迟毫秒后执行的函数。`this`上下文和所有参数都是按原样传递的，
+    *                                    执行去节流功能时，调用`callback`。
+    * @param  {Boolean}   debounceMode   如果`debounceMode`为true，`clear`在`delay`ms后执行。
+    *                                    如果debounceMode是false，`callback`在`delay` ms之后执行。
+    *
+    * @return {Function}  新的节流函数
+    */
+    function throttle(delay, noTrailing, callback, debounceMode) {
 
-    // After wrapper has stopped being called, this timeout ensures that
-    // `callback` is executed at the proper times in `throttle` and `end`
-    // debounce modes.
-    var timeoutID;
+        // After wrapper has stopped being called, this timeout ensures that
+        // `callback` is executed at the proper times in `throttle` and `end`
+        // debounce modes.
+        var timeoutID;
 
-    // Keep track of the last time `callback` was executed.
-    var lastExec = 0;
+        // Keep track of the last time `callback` was executed.
+        var lastExec = 0;
 
-    // `noTrailing` defaults to falsy.
-    if (typeof noTrailing !== 'boolean') {
-        debounceMode = callback;
-        callback = noTrailing;
-        noTrailing = undefined;
+        // `noTrailing` defaults to falsy.
+        if (typeof noTrailing !== 'boolean') {
+            debounceMode = callback;
+            callback = noTrailing;
+            noTrailing = undefined;
+        }
+
+        // The `wrapper` function encapsulates all of the throttling / debouncing
+        // functionality and when executed will limit the rate at which `callback`
+        // is executed.
+        function wrapper() {
+
+            var self = this;
+            var elapsed = Number(new Date()) - lastExec;
+            var args = arguments;
+
+            // Execute `callback` and update the `lastExec` timestamp.
+            function exec() {
+                lastExec = Number(new Date());
+                callback.apply(self, args);
+            }
+
+            // If `debounceMode` is true (at begin) this is used to clear the flag
+            // to allow future `callback` executions.
+            function clear() {
+                timeoutID = undefined;
+            }
+
+            if (debounceMode && !timeoutID) {
+                // Since `wrapper` is being called for the first time and
+                // `debounceMode` is true (at begin), execute `callback`.
+                exec();
+            }
+
+            // Clear any existing timeout.
+            if (timeoutID) {
+                clearTimeout(timeoutID);
+            }
+
+            if (debounceMode === undefined && elapsed > delay) {
+                // In throttle mode, if `delay` time has been exceeded, execute
+                // `callback`.
+                exec();
+
+            } else if (noTrailing !== true) {
+                // In trailing throttle mode, since `delay` time has not been
+                // exceeded, schedule `callback` to execute `delay` ms after most
+                // recent execution.
+                //
+                // If `debounceMode` is true (at begin), schedule `clear` to execute
+                // after `delay` ms.
+                //
+                // If `debounceMode` is false (at end), schedule `callback` to
+                // execute after `delay` ms.
+                timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === undefined ? delay - elapsed : delay);
+            }
+        }
+        // Return the wrapper function.
+        return wrapper;
     }
-
-    // The `wrapper` function encapsulates all of the throttling / debouncing
-    // functionality and when executed will limit the rate at which `callback`
-    // is executed.
-    function wrapper() {
-
-        var self = this;
-        var elapsed = Number(new Date()) - lastExec;
-        var args = arguments;
-
-        // Execute `callback` and update the `lastExec` timestamp.
-        function exec() {
-            lastExec = Number(new Date());
-            callback.apply(self, args);
-        }
-
-        // If `debounceMode` is true (at begin) this is used to clear the flag
-        // to allow future `callback` executions.
-        function clear() {
-            timeoutID = undefined;
-        }
-
-        if (debounceMode && !timeoutID) {
-            // Since `wrapper` is being called for the first time and
-            // `debounceMode` is true (at begin), execute `callback`.
-            exec();
-        }
-
-        // Clear any existing timeout.
-        if (timeoutID) {
-            clearTimeout(timeoutID);
-        }
-
-        if (debounceMode === undefined && elapsed > delay) {
-            // In throttle mode, if `delay` time has been exceeded, execute
-            // `callback`.
-            exec();
-
-        } else if (noTrailing !== true) {
-            // In trailing throttle mode, since `delay` time has not been
-            // exceeded, schedule `callback` to execute `delay` ms after most
-            // recent execution.
-            //
-            // If `debounceMode` is true (at begin), schedule `clear` to execute
-            // after `delay` ms.
-            //
-            // If `debounceMode` is false (at end), schedule `callback` to
-            // execute after `delay` ms.
-            timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === undefined ? delay - elapsed : delay);
-        }
-    }
-    // Return the wrapper function.
-    return wrapper;
-}
 {% endcodeblock %}
 
 ### debounce
 
 {% codeblock lang:js %}
-/**
- * @desc 函数防抖 
- * 与throttle不同的是，debounce保证一个函数在多少毫秒内不再被触发，只会执行一次，
- * 要么在第一次调用return的防抖函数时执行，要么在延迟指定毫秒后调用。
- * @example 适用场景：如在线编辑的自动存储防抖。
- * @param  {Number}   delay         0或者更大的毫秒数。 对于事件回调，大约100或250毫秒（或更高）的延迟是最有用的。
- * @param  {Boolean}  atBegin       可选，默认为false。
- *                                  如果`atBegin`为false或未传入，回调函数则在第一次调用return的防抖函数后延迟指定毫秒调用。
-                                    如果`atBegin`为true，回调函数则在第一次调用return的防抖函数时直接执行
- * @param  {Function} callback      延迟毫秒后执行的函数。`this`上下文和所有参数都是按原样传递的，
- *                                  执行去抖动功能时，，调用`callback`。
- *
- * @return {Function} 新的防抖函数。
- */
-var throttle = require('./throttle');
-function debounce(delay, atBegin, callback) {
-    return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
-}
+    /**
+    * @desc 函数防抖 
+    * 与throttle不同的是，debounce保证一个函数在多少毫秒内不再被触发，只会执行一次，
+    * 要么在第一次调用return的防抖函数时执行，要么在延迟指定毫秒后调用。
+    * @example 适用场景：如在线编辑的自动存储防抖。
+    * @param  {Number}   delay         0或者更大的毫秒数。 对于事件回调，大约100或250毫秒（或更高）的延迟是最有用的。
+    * @param  {Boolean}  atBegin       可选，默认为false。
+    *                                  如果`atBegin`为false或未传入，回调函数则在第一次调用return的防抖函数后延迟指定毫秒调用。
+                                        如果`atBegin`为true，回调函数则在第一次调用return的防抖函数时直接执行
+    * @param  {Function} callback      延迟毫秒后执行的函数。`this`上下文和所有参数都是按原样传递的，
+    *                                  执行去抖动功能时，，调用`callback`。
+    *
+    * @return {Function} 新的防抖函数。
+    */
+    var throttle = require('./throttle');
+    function debounce(delay, atBegin, callback) {
+        return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
+    }
 {% endcodeblock %}
+
+### 金额千分位
+
+```js
+    /**
+    * 
+    * @desc   将金额转换千分位的，带逗号的
+    * @param  {Number} num 要转换的金额 
+    * @return {String}
+    */
+    function thousands(num) {
+        num = num.toString();
+        num = num.replace(/[^0-9.+-]/g, ''); // 剔除非数字的字符
+        num = parseFloat(num) || 0;
+        num = num.toString();
+        if (/^-?\d+\.?\d+$/.test(num)) {
+            if (/^-?\d+$/.test(num)) {
+                num = num + ",00";
+            } else {
+                num = num.replace(/\./, ',');
+            }
+            while (/\d{4}/.test(num)) {
+                num = num.replace(/(\d+)(\d{3}\,)/, '$1,$2');
+            }
+            num = num.replace(/\,(\d*)$/, '.$1');
+        }
+        return num
+    }
+```
+
+### 转度分秒
+
+```js
+    Number.prototype.toDfm = function (l) {
+        if(this) {
+            return formatDegree(this);
+        } else {
+            return this;
+        }
+        function formatDegree(value) {
+            value = Math.abs(value);
+            var v1 = Math.floor(value);
+            var v2 = Math.floor((value - v1) * 60);
+            var v3 = Math.round((value - v1) * 3600 % 60);
+            return v1 + '°' + v2 + '\'' + v3 + '"';
+        }
+    }
+```
 
 ## Html
 
 ### loadScript
 
 {% codeblock lang:js %}
-/*
- * LOAD SCRIPTS
- * Usage:
- * Define function = myPrettyCode ()...
- * loadScript("js/my_lovely_script.js", myPrettyCode);
- */
-function loadScript(scriptName, callback) {
-    if (!jsArray) window.jsArray = {};
+    /*
+    * LOAD SCRIPTS
+    * Usage:
+    * Define function = myPrettyCode ()...
+    * loadScript("js/my_lovely_script.js", myPrettyCode);
+    */
+    function loadScript(scriptName, callback) {
+        if (!jsArray) window.jsArray = {};
 
-	if (!jsArray[scriptName]) {
-		// 添加script标签到文档中
-		var body = document.getElementsByTagName('body')[0],
-			script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.src = scriptName;
+        if (!jsArray[scriptName]) {
+            // 添加script标签到文档中
+            var body = document.getElementsByTagName('body')[0],
+                script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = scriptName;
 
-		// 绑定资料加载成功的回调方法
-		script.onload = function () {
-			jsArray[scriptName] = true;
-			callback();
-		};
+            // 绑定资料加载成功的回调方法
+            script.onload = function () {
+                jsArray[scriptName] = true;
+                callback();
+            };
 
-		// 添加到dom中
-		body.appendChild(script);
+            // 添加到dom中
+            body.appendChild(script);
 
-		// 清楚变量引用
-		//body = null;
-		//script = null;
-	} else if (callback) {
-		// 如果资源已引用则直接回调
-		callback();
-	}
-}
+            // 清楚变量引用
+            //body = null;
+            //script = null;
+        } else if (callback) {
+            // 如果资源已引用则直接回调
+            callback();
+        }
+    }
 {% endcodeblock %}
 
 ### loadCss
 
 {% codeblock lang:js %}
-/*
- * LOAD CSSS
- * Usage:
- * Define function = myPrettyCode ()...
- * loadCss("css/style.css", myPrettyCode);
- */
-function loadCss(linkName, callback, rel) {
-    if (!cssArray) window.cssArray = {};
-    
-	if (!cssArray[linkName]) {
-		// 添加script标签到文档中
-		var head = document.getElementsByTagName('head')[0],
-			link = document.createElement('link');
-		link.type = 'text/css';
-		link.rel = 'stylesheet' + (rel ? ('/' + rel) : '');
-		link.href = linkName;
+    /*
+    * LOAD CSSS
+    * Usage:
+    * Define function = myPrettyCode ()...
+    * loadCss("css/style.css", myPrettyCode);
+    */
+    function loadCss(linkName, callback, rel) {
+        if (!cssArray) window.cssArray = {};
+        
+        if (!cssArray[linkName]) {
+            // 添加script标签到文档中
+            var head = document.getElementsByTagName('head')[0],
+                link = document.createElement('link');
+            link.type = 'text/css';
+            link.rel = 'stylesheet' + (rel ? ('/' + rel) : '');
+            link.href = linkName;
 
-		link.onload = function () {
-			cssArray[linkName] = true;
-			callback();
-		};
+            link.onload = function () {
+                cssArray[linkName] = true;
+                callback();
+            };
 
-		// fire the loading
-		head.appendChild(link);
+            // fire the loading
+            head.appendChild(link);
 
-		// 清楚变量引用
-		//head = null;
-		//link = null;
-	} else if (callback) {
-		// 如果资源已引用则直接回调
-		callback();
-	}
-}
+            // 清楚变量引用
+            //head = null;
+            //link = null;
+        } else if (callback) {
+            // 如果资源已引用则直接回调
+            callback();
+        }
+    }
 {% endcodeblock %}
 
 ## auto-font-size
