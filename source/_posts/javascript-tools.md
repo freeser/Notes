@@ -930,20 +930,28 @@ function parseQueryString(url) {
 ### getParam
 
 {% codeblock lang:js %}
-/**
- * 
- * @desc   url参数获取值
- * @param  {String} name  要从url中提取的键值名
- * @param  {String} url  default: window.location.href
- * @return {String} 
- */
-function getParam(name, href) {
-	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-	var regexS = "[\\?&]" + name + "=([^&#]*)";
-	var regex = new RegExp(regexS);
-	var results = regex.exec(href || window.location.href);
-	return results ? results[1] : "";
-}
+    /**
+    * 
+    * @desc   url参数获取值
+    * @param  {String} name  要从url中提取的键值名
+    * @param  {String} url  default: window.location.href
+    * @return {String} 
+    */
+    function getParam(name, href) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(href || window.location.href);
+        return results ? results[1] : "";
+    }
+    // 方法二
+    const getQueryParams = () => {
+        const params = {}
+        window.location.href.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
+            params[$1] = $3
+        })
+        return params
+    }
 {% endcodeblock %}
 
 ### stringfyQueryString
