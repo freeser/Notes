@@ -343,3 +343,16 @@ perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有�
 CSS Grid 布局是 CSS 中最强大的布局系统。与 flexbox 的一维布局系统不同，CSS Grid 布局是一个二维布局系统，也就意味着它可以同时处理列和行。通过将 CSS 规则应用于 父元素 (成为 Grid Container 网格容器)和其 子元素（成为 Grid Items 网格项），你就可以轻松使用 Grid(网格) 布局。
 
 参考：[CSS Grid 布局完全指南](http://www.css88.com/archives/8510)
+
+### css 渐变生成加号减号三角
+
+```css
+	.tri {
+		width: 6px; height: 6px;
+		background: linear-gradient(to top, #ddd, #ddd) no-repeat, linear-gradient(to right, #ddd, #ddd) no-repeat, linear-gradient(135deg, #fff, #fff 6px, hsla(0,0%,100%,0) 6px) no-repeat;
+		background-size: 6px 1px, 1px 6px, 6px 6px;
+		transform: rotate(-45deg);
+	}
+```
+
+参考：[CSS3 linear-gradient线性渐变实现虚线等简单实用图形](http://www.zhangxinxu.com/wordpress/2017/10/css3-linear-gradient-dashed-triangle-graph/)
