@@ -1124,11 +1124,14 @@ function stringfyQueryString(obj) {
         return num
     }
 
-    // 方法二
+    // 方法二（有局限性，不支持负数和小数）
     String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
     // 方法三
     Number.toLocaleString('en-US');
 ```
+参考：
+[千位分隔符(逗号)表示web网页中的大数字](http://www.zhangxinxu.com/wordpress/2017/09/web-page-comma-number/)
+[toLocaleString](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 
 ### 转度分秒
 
