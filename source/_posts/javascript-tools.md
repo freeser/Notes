@@ -1123,6 +1123,11 @@ function stringfyQueryString(obj) {
         }
         return num
     }
+
+    // 方法二
+    String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+    // 方法三
+    Number.toLocaleString('en-US');
 ```
 
 ### 转度分秒
