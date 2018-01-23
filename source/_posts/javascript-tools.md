@@ -1244,6 +1244,49 @@ function stringfyQueryString(obj) {
 })(window);
 ```
 
+## Ajax
+
+```js
+function ajax(options){
+    var xhr = null;
+    var type = options.type || "get";
+    var asyn = options.asyn || true;
+    var url = options.url;            // url 接收 传输位置
+    var success = options.success;    // success 接收 传输完成后的回调函数
+    var data = options.data || '';    // data 接收需要附带传输的数据
+
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();   //一般浏览器
+    } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");    //兼容处理IE6+
+    }
+    if (!xhr) {
+        return false;
+    }
+    if (type == "get" && data){
+        url += "/?" + stringfyQueryString(data); // 参考Url下将对象序列化的方法
+    }
+
+    //初始化ajax请求
+    xhr.open( type , url , asyn );
+    //规定传输数据的格式
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    //发送ajax请求（包括post数据的传输）
+    type == "get" ? xhr.send() : xhr.send(data);
+
+    //处理请求
+    xhr.onreadystatechange = function(){
+        if(xhr.readState == 4){
+            if (xhr.status == 200){
+                success(xhr.responsetext);
+            } else {
+                alert("请求出错" + xhr.status)
+            }
+        }
+    }
+```
+
+
 # 鸣谢
 
 1、[打造自己的JavaScript武器库](https://juejin.im/post/5a091afe6fb9a044ff30f402)
