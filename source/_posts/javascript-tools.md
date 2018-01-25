@@ -1123,10 +1123,16 @@ function stringfyQueryString(obj) {
         }
         return num
     }
-
+    function thousands(num) {
+        return num && num.toString().replace(/([+-]?)(\d+)([.]\d+)?/, function($0, $1, $2, $3) {
+            return $1 + $2.replace(/(\d)(?=(\d{3})+$)/g, function($10, $11) {
+                return $11 + ',';
+            }) + ($3 || '');
+        });
+    }
     // 方法二（有局限性，不支持负数和小数）
     String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
-    // 方法三
+    // 方法三，只能精确到小数点后3位
     Number.toLocaleString('en-US');
 ```
 参考：
