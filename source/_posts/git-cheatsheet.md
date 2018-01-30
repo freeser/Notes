@@ -72,6 +72,7 @@ Pro Git book: https://git-scm.com/book/zh/v2
 4. 另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
 5. 恢复指定id的镜像 `git stash apply/pop stash@{id}` 使用`list`查看id
 5. 查看所有stash的镜像 `git stash list`
+6. 删除stash。`git stash drop <stash@{id}>` 如果不加stash编号，默认的就是删除最新的，也就是编号为0的那个，加编号就是删除指定编号的stash。
 6. 清除所有用 `git stash clear`
 
 
