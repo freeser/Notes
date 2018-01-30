@@ -70,6 +70,7 @@ Pro Git book: https://git-scm.com/book/zh/v2
 2. 暂存所有修改（同 -a， 但是可以添加message信息，方便区分各个stash镜像，最好使用这个命令）`git stash save -a  "some comment" 或者 --all`
 3. 一是用`git stash apply`恢复，但是恢复后，stash内容并不删除，你需要用`git stash drop`来删除；
 4. 另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
+5. 恢复指定id的镜像 `git stash apply/pop stash@{id}` 使用`list`查看id
 5. 查看所有stash的镜像 `git stash list`
 6. 清除所有用 `git stash clear`
 
