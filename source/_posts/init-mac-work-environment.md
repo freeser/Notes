@@ -32,10 +32,9 @@ MAC上最好的GIT免费GUI工具是SourceTree（没有之一）。此外，最�
 git config --global user.name "freeser.work"
 git config --global user.email "freeser@work.com"
 ```
-5. 安装成功后打开终端
+5. 安装成功后打开终端（Windows下打开Git Bash，创建SSH Key， `ssh-keygen -t rsa -C "youremail@example.com"`）
 `cd ~进入根目录` 输入命令 `ssh-keygen` 生成 `ssh-key`，如果有提示，一直按回车
 {% img /img/init-mac-work-environment-1.png %}
-
 6. 将SSH key添加到GitHub。步骤如下：
 
   * 登录到GitHub页面，`Account Settings->SSH Public Keys->Add another key`
