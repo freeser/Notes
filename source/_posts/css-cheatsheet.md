@@ -356,3 +356,11 @@ CSS Grid 布局是 CSS 中最强大的布局系统。与 flexbox 的一维布局
 ```
 
 参考：[CSS3 linear-gradient线性渐变实现虚线等简单实用图形](http://www.zhangxinxu.com/wordpress/2017/10/css3-linear-gradient-dashed-triangle-graph/)
+
+### css 去掉google自动填充的黄色背景
+
+```css
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+```
