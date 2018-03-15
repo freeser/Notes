@@ -1292,6 +1292,13 @@ function ajax(options){
     }
 ```
 
+# 常用小工具
+
+## 通过银行卡号得到银行卡信息
+
+示例代码篇幅太长，[点击查看](https://github.com/freeser/example/blob/master/bankcardToinfo.js)
+牛人通过[支付宝的开放API](https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?cardNo=6222005865412565805&cardBinCheck=true)封装的代码库，可以直接调用，参考[github地址](https://github.com/navyxie/bankcardinfo)
+
 
 # 鸣谢
 
