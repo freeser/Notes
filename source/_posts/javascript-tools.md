@@ -291,6 +291,10 @@ function getCookie(name) {
     }
     return "";
 }
+// 变种方法，替换Language
+function getCookie() {
+    return document.cookie.match(/Language=(\S*)(;|\b)/)[1]
+}
 {% endcodeblock %}
 
 ### setCookie
