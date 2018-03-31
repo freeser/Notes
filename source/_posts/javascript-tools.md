@@ -293,6 +293,7 @@ function getCookie(name) {
 }
 // 变种方法，替换Language
 function getCookie() {
+    // window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return document.cookie.match(/Language=(\S*)(;|\b)/)[1]
 }
 {% endcodeblock %}
