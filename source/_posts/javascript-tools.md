@@ -1318,6 +1318,7 @@ function ajax(options){
         document.body.scrollTop = bfscrolltop; // 将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
     });
 ```
+[参考](https://blog.csdn.net/github_37533433/article/details/66471962)
 
 
 # 鸣谢
