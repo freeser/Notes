@@ -15,7 +15,7 @@ categories: [收集整理, 摘抄备份]
 
 ### arrayEqual
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 判断两个数组是否相等
@@ -31,7 +31,7 @@ function arrayEqual(arr1, arr2) {
     }
     return true;
 }
-{% endcodeblock %}
+```
 
 ### indexOf()
 
@@ -39,7 +39,7 @@ function arrayEqual(arr1, arr2) {
 `array.indexOf(searchElement[, fromIndex = 0])`
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function(ele) {
         // 获取数组长度
@@ -64,7 +64,7 @@ if (!Array.prototype.indexOf) {
         }
     }
 }
-{% endcodeblock %}
+```
 
 
 ### forEach()
@@ -78,7 +78,7 @@ if (!Array.prototype.indexOf) {
 `forEach` 方法按升序为数组中含有效值的每一项执行一次`callback` 函数，那些已删除（使用`delete`方法等情况）或者从未赋值的项将被跳过（但不包括哪些值为 `undefined` 的项）。
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if ( !Array.prototype.forEach) {
   Array.prototype.forEach = function forEach(callback) {
     // 获取数组长度
@@ -96,7 +96,7 @@ if ( !Array.prototype.forEach) {
     }
   }
 }
-{% endcodeblock %}
+```
 
 ### map()
 
@@ -104,7 +104,7 @@ if ( !Array.prototype.forEach) {
 `array.map(callback[, thisArg])`
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if (!Array.prototype.map) {
   Array.prototype.map = function(callback) {
       // 获取数组长度
@@ -124,7 +124,7 @@ if (!Array.prototype.map) {
       return newArr;
   }    
 }
-{% endcodeblock %}
+```
 
 ### filter()
 
@@ -132,7 +132,7 @@ if (!Array.prototype.map) {
 `array.filter(callback[, thisArg])`
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if (!Array.prototype.filter) {
     Array.prototype.filter = function(callback) {
       // 获取数组长度
@@ -154,7 +154,7 @@ if (!Array.prototype.filter) {
       return newArr;
   }
 }
-{% endcodeblock %}
+```
 
 
 ### some()
@@ -163,7 +163,7 @@ if (!Array.prototype.filter) {
 `arr.some(callback[, thisArg])`
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if (!Array.prototype.some) {
   Array.prototype.some = function(callback) {
       // 获取数组长度
@@ -181,7 +181,7 @@ if (!Array.prototype.some) {
       return false;
   }
 }
-{% endcodeblock %}
+```
 
 ### every()
 
@@ -189,7 +189,7 @@ if (!Array.prototype.some) {
 `arr.every(callback[, thisArg])`
 
 兼容IE6～8的写法：
-{% codeblock lang:js %}
+```js
 if (!Array.prototype.every) {
   Array.prototype.every = function(callback) {
       // 获取数组长度
@@ -207,13 +207,13 @@ if (!Array.prototype.every) {
       return true;
   }
 }
-{% endcodeblock %}
+```
 
 ## Class
 
 ### hasClass
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 判断元素是否有某个class
@@ -224,12 +224,12 @@ if (!Array.prototype.every) {
 function hasClass(ele, cls) {
     return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
 }
-{% endcodeblock %}
+```
 
 
 ### addClass
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   为元素添加class
@@ -244,12 +244,12 @@ function addClass(ele, cls) {
         ele.className += ' ' + cls;
     }
 }
-{% endcodeblock %}
+```
 
 
 ### removeClass
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 为元素移除class
@@ -265,13 +265,13 @@ function removeClass(ele, cls) {
         ele.className = ele.className.replace(reg, ' ');
     }
 }
-{% endcodeblock %}
+```
 
 ## Cookie
 
 ### getCookie
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 根据name读取cookie
@@ -296,11 +296,11 @@ function getCookie() {
     // window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return document.cookie.match(/Language=(\S*)(;|\b)/)[1]
 }
-{% endcodeblock %}
+```
 
 ### setCookie
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc  设置Cookie
@@ -313,11 +313,11 @@ function setCookie(name, value, expires) {
     expires &&  _end.setTime(_end.getTime() + (expires * 1000));
     document.cookie = name + "=" + escape(value) + (expires ? (";expires=" + _end.toGMTString()) : "") + ";path=/;domain=" + location.host;
 }
-{% endcodeblock %}
+```
 
 ### removeCookie
 
-{% codeblock lang:js %}
+```js
 var getCookie = require('./getCookie');
 /**
  * 
@@ -331,13 +331,13 @@ function removeCookie(name) {
     if (cval != null)
         document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
-{% endcodeblock %}
+```
 
 ## Device
 
 ### getExplore
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 获取浏览器类型和版本
@@ -363,11 +363,11 @@ function getExplore() {
     if (sys.safari) return ('Safari: ' + sys.safari)
     return 'Unkonwn'
 }
-{% endcodeblock %}
+```
 
 ### getOS
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 获取操作系统类型
@@ -385,13 +385,13 @@ function getOS() {
     if (/android/i.test(userAgent)) return 'android'
     if (/win/i.test(appVersion) && /phone/i.test(userAgent)) return 'windowsPhone'
 }
-{% endcodeblock %}
+```
 
 ## Dom
 
 ### offset
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc  获取一个元素的距离文档(document)的位置，类似jQ中的offset()
@@ -410,11 +410,11 @@ function offset(ele) {
     };
     return pos;
 }
-{% endcodeblock %}
+```
 
 ### getScrollTop
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 获取滚动条距顶部的距离
@@ -422,11 +422,11 @@ function offset(ele) {
 function getScrollTop() {
     return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
 }
-{% endcodeblock %}
+```
 
 ### setScrollTop
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 设置滚动条距顶部的距离
@@ -435,11 +435,11 @@ function setScrollTop(value) {
     window.scrollTo(0, value);
     return value;
 }
-{% endcodeblock %}
+```
 
 ### scrollTo
 
-{% codeblock lang:js %}
+```js
 var getScrollTop = require('./getScrollTop');
 var setScrollTop = require('./setScrollTop');
 var requestAnimFrame = (function () {
@@ -477,13 +477,13 @@ function scrollTo(to, duration) {
             scrollTo(to, duration - 16);
         });
 }
-{% endcodeblock %}
+```
 
 ## Keycode
 
 ### getKeyName
 
-{% codeblock lang:js %}
+```js
 var keyCodeMap = {
     8: 'Backspace',
     9: 'Tab',
@@ -606,13 +606,13 @@ function getKeyName(keycode) {
         return '';
     }
 };
-{% endcodeblock %}
+```
 
 ## Object
 
 ### deepClone
 
-{% codeblock lang:js %}
+```js
 /**
  * @desc 深拷贝，支持常见类型
  * @param {Any} values
@@ -650,11 +650,11 @@ function deepClone(values) {
 
     throw new Error("Unable to copy values! Its type isn't supported.");
 }
-{% endcodeblock %}
+```
 
 ### isEmptyObject
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   判断`obj`是否为空
@@ -666,13 +666,13 @@ function isEmptyObject(obj) {
         return false
     return !Object.keys(obj).length
 }
-{% endcodeblock %}
+```
 
 ## Random
 
 ### randomColor
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 随机生成颜色
@@ -681,11 +681,11 @@ function isEmptyObject(obj) {
 function randomColor() {
     return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 }
-{% endcodeblock %}
+```
 
 ### randomNum
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 生成指定范围随机数
@@ -696,13 +696,13 @@ function randomColor() {
 function randomNum(min, max) {
     return Math.floor(min + Math.random() * (max - min));
 }
-{% endcodeblock %}
+```
 
 ## Regexp
 
 ### isEmail
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   判断是否为邮箱地址
@@ -712,11 +712,11 @@ function randomNum(min, max) {
 function isEmail(str) {
     return /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(str);
 }
-{% endcodeblock %}
+```
 
 ### isIdCard
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc  判断是否为身份证号
@@ -742,11 +742,11 @@ function isIdCard(str) {
     }
     return false
 }
-{% endcodeblock %}
+```
 
 ### isPhoneNum
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   判断是否为手机号
@@ -756,11 +756,11 @@ function isIdCard(str) {
 function isPhoneNum(str) {
     return /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(str)
 }
-{% endcodeblock %}
+```
 
 ### isUrl
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   判断是否为URL地址
@@ -770,13 +770,13 @@ function isPhoneNum(str) {
 function isUrl(str) {
     return /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i.test(str);
 }
-{% endcodeblock %}
+```
 
 ## String
 
 ### digitUppercase
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   现金额转大写
@@ -813,13 +813,13 @@ function digitUppercase(n) {
         .replace(/(零.)+/g, '零')
         .replace(/^整$/, '零元整');
 };
-{% endcodeblock %}
+```
 
 ## Support
 
 ### isSupportWebP
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc 判断浏览器是否支持webP格式图片
@@ -828,13 +828,13 @@ function digitUppercase(n) {
 function isSupportWebP() {
     return !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
 }
-{% endcodeblock %}
+```
 
 ## Time
 
 ### formatPassTime
 
-{% codeblock lang:js %}
+```js
 /**
  * @desc   格式化${startTime}距现在的已过时间
  * @param  {Date} startTime 
@@ -855,11 +855,11 @@ function formatPassTime(startTime) {
     if (min) return min + "分钟前"
     else return '刚刚'
 }
-{% endcodeblock %}
+```
 
 ### formatRemainTime
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   格式化现在距${endTime}的剩余时间
@@ -882,7 +882,7 @@ function formatRemainTime(endTime) {
     }
     return (d ? d + "天 " : "" ) + (h ? h + "小时 " : '') + (m ? m +"分钟 " : "") + s + "秒";
 }
-{% endcodeblock %}
+```
 
 ### Format
 ```js
@@ -915,7 +915,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 ### parseQueryString
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   url参数转对象
@@ -930,11 +930,11 @@ function parseQueryString(url) {
     }
     return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 }
-{% endcodeblock %}
+```
 
 ### getParam
 
-{% codeblock lang:js %}
+```js
     /**
     * 
     * @desc   url参数获取值
@@ -957,11 +957,11 @@ function parseQueryString(url) {
         })
         return params
     }
-{% endcodeblock %}
+```
 
 ### stringfyQueryString
 
-{% codeblock lang:js %}
+```js
 /**
  * 
  * @desc   对象序列化
@@ -983,13 +983,13 @@ function stringfyQueryString(obj) {
     }
     return pairs.join('&');
 }
-{% endcodeblock %}
+```
 
 ## Function
 
 ### throttle
 
-{% codeblock lang:js %}
+```js
     /**
     * @desc   函数节流。
     * 适用于限制`resize`和`scroll`等函数的调用频率
@@ -1076,11 +1076,11 @@ function stringfyQueryString(obj) {
         // Return the wrapper function.
         return wrapper;
     }
-{% endcodeblock %}
+```
 
 ### debounce
 
-{% codeblock lang:js %}
+```js
     /**
     * @desc 函数防抖 
     * 与throttle不同的是，debounce保证一个函数在多少毫秒内不再被触发，只会执行一次，
@@ -1099,7 +1099,7 @@ function stringfyQueryString(obj) {
     function debounce(delay, atBegin, callback) {
         return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
     }
-{% endcodeblock %}
+```
 
 ### 金额千分位
 
@@ -1167,7 +1167,7 @@ function stringfyQueryString(obj) {
 
 ### loadScript
 
-{% codeblock lang:js %}
+```js
     /*
     * LOAD SCRIPTS
     * Usage:
@@ -1201,11 +1201,11 @@ function stringfyQueryString(obj) {
             callback();
         }
     }
-{% endcodeblock %}
+```
 
 ### loadCss
 
-{% codeblock lang:js %}
+```js
     /*
     * LOAD CSSS
     * Usage:
@@ -1239,7 +1239,7 @@ function stringfyQueryString(obj) {
             callback();
         }
     }
-{% endcodeblock %}
+```
 
 ## auto-font-size
 
@@ -1303,6 +1303,21 @@ function ajax(options){
 
 示例代码篇幅太长，[点击查看](https://github.com/freeser/example/blob/master/bankcardToinfo.js)
 牛人通过[支付宝的开放API](https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?cardNo=6222005865412565805&cardBinCheck=true)封装的代码库，可以直接调用，参考[github地址](https://github.com/navyxie/bankcardinfo)
+
+## ios输入法遮挡键盘的解决方案
+
+```js
+    //解决第三方软键盘唤起时底部input输入框被遮挡问题， 改为fixed固定
+    var bfscrolltop = document.body.scrollTop;//获取软键盘唤起前浏览器滚动部分的高度
+    $("input.inputframe").focus(function(){//在这里‘input.inputframe’是我的底部输入栏的输入框，当它获取焦点时触发事件
+        setTimeout(function(){//设置一个计时器，时间设置与软键盘弹出所需时间相近
+           document.body.scrollTop = document.body.scrollHeight;//获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
+        }, 400)
+    }).blur(function(){
+        //设定输入框失去焦点时的事件
+        document.body.scrollTop = bfscrolltop; // 将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
+    });
+```
 
 
 # 鸣谢
