@@ -410,3 +410,19 @@ button {
 }
 ```
 参考：[CSS filter:hue-rotate色调旋转滤镜实现按钮批量生产](https://www.zhangxinxu.com/wordpress/2018/11/css-filter-hue-rotate-button/)
+
+
+### scroll-behavior:smooth
+
+`scroll-behavior:smooth` 写在滚动容器元素上，可以让容器（非鼠标手势触发）的滚动变得平滑。
+
+```js
+// 等同于
+target.scrollIntoView({
+    behavior: "smooth"
+});
+```
+
+> 如果我们的网页已经通过CSS设置了`scroll-behavior:smooth`声明，则我们直接执行`target.scrollIntoView()`方法就会有平滑滚动，无需再额外设置`behavior`参数。
+
+[CSS scroll-behavior和JS scrollIntoView让页面滚动平滑](https://www.zhangxinxu.com/wordpress/2018/10/scroll-behavior-scrollintoview-%E5%B9%B3%E6%BB%91%E6%BB%9A%E5%8A%A8/)
