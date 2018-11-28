@@ -13,7 +13,7 @@ timezone:
 # custom Site settings
 # more detail check out docs
 SEOTitle: Freeser's blog 
-header-img: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg
+header-img: /img/user/3.jpg
 email: freeser@126.com
 keyword: js css html vue angular jquery nodejs # seo key words
 
@@ -61,7 +61,7 @@ ga_domain:
 # Sidebar settings
 sidebar: true
 sidebar-about-description: "求知若饥 虚心若愚" # 个人描述
-sidebar-avatar: http://owz81uqpo.bkt.clouddn.com/20150131_154827000_iOS.jpg    # use absolute URL
+sidebar-avatar: /img/user/3.jpg    # use absolute URL
 
 
 # Featured Tags
@@ -146,7 +146,7 @@ deploy:
 
 
 # img CDN path
-cdn-url: owz81uqpo.bkt.clouddn.com # 你的CDN地址
+#cdn-url: owz81uqpo.bkt.clouddn.com # 你的CDN地址
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
@@ -155,8 +155,8 @@ clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
 clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg #博文默认的图片
-post-default-img-mobile: //owz81uqpo.bkt.clouddn.com/lion-blur-bg.jpg #移动端显示的图片
+post-default-img: /img/user/web.jpg #博文默认的图片
+post-default-img-mobile: /img/user/web.jpg #移动端显示的图片
 
 # search api , set your custom key
 swiftype_key: 

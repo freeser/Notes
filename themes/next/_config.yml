@@ -155,7 +155,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: http://owz81uqpo.bkt.clouddn.com/20150131_154827000_iOS.jpg
+avatar: /img/user/3.jpg
 
 # Table Of Contents in the Sidebar
 toc:
