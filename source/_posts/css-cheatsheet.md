@@ -364,3 +364,49 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 ```
+
+### css :focus-within 
+
+元素自身或者它的某个后代匹配:focus伪类
+```css
+div:focus-within {
+  background: cyan;
+}
+```
+
+### 文字渐变色
+
+IE不支持，需要容器为行内（块）元素
+
+```css
+label {
+    color: #0B77FF;
+    background-image: -webkit-linear-gradient(0deg, #0B77FF, #39CAF9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+```
+
+### 边框渐变色
+
+```css
+div {
+	border: 3px solid #3ACBF9;
+	border-image: -webkit-linear-gradient(270deg,#3ACBF9,#1081FF) 10 10;
+	border-image: -moz-linear-gradient(270deg,#3ACBF9,#1081FF) 10 10;
+	border-image: linear-gradient(270deg,#3ACBF9,#1081FF) 10 10;
+}
+```
+
+### filter: hue-rotate
+
+色调旋转滤镜实现按钮颜色更改
+
+```css
+button {
+	filter: hue-rotate(90deg);      /* 90度旋转 */
+	filter: hue-rotate(.5turn);     /* 180度旋转 */
+	filter: hue-rotate(3.142rad);   /* 3.142弧度旋转，近似一圈，也就是360度 */
+}
+```
+参考：[CSS filter:hue-rotate色调旋转滤镜实现按钮批量生产](https://www.zhangxinxu.com/wordpress/2018/11/css-filter-hue-rotate-button/)
