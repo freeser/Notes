@@ -178,3 +178,12 @@ console.log(parenthesesChecker('[{()]')); //false
     helper.print();
     dest.print();
 ```
+
+# 基础知识
+
+## 变量初始化阶段
+
+VO按照如下顺序填充：
+1. 函数参数（若未传入，初始化该参数值为undefined）
+2. 函数声明（或发生全名冲突，会覆盖）
+3. 变量声明（初始化变量值为undefined，若发生命名冲突，会忽略）
