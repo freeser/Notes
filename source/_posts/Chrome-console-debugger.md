@@ -336,14 +336,73 @@ console.clown({ message: 'hello!' })
 因此，不用在源代码的多个位置添加`console.log / console.table / console.time`等，而只需使用条件断点在`Sources`面板中“附加”它们。它们不会停止，但它们会运行，当你不再需要它们时，你在断点列表，你可以通过两次点击鼠标将它们全部删除。他们会像一堆忍者一样消失！
 ![debuggerconsole 示例](/img/console/debuggerconsole.gif "debuggerconsole 示例")
 
+# queryObjects 方法
 
+假设我们创建了几个基于某个类的实例对象，但是在某个时刻，某个执行环境内我们想要知道还存在有几个实例，这个时间 `DevTools ` 中的 `queryObjects` 就起到他应有的作用了
 
+```js
+class Person {
+  constructor(name, role) {
+    this.name = name;
+    this.role = role;
+  }
+}
+const = new Person('john', 'dad')
 
+let kids = [
+  new Person('Mary', 'kid'),
+  new Person('Luke', 'kid')
+]
 
+new  Person('Lucius', 'uncle')
 
+console.log('这会还剩下多少人呢？')
+// 用到我们的方法了，在控制台内使用：
+// queryObjects(Person)
 
+```
 
+注意了，上图中创建的最后一个对象是不可用的，因为对这个对象的引用没有保留在任何地方 - 在执行代码完之后，就只有3个Person对象：
 
+![queryObjects 示例](/img/console/queryObjects.gif "queryObjects 示例")
+
+# monitor 方法
+
+`monitor`是一个`DevTools`函数，它允许你“监视”任何函数的调用：每当一个“间谍”函数运行时，控制台将记录这个事件，包括函数的名称和调用它的参数。
+
+来看下下面这个示例，将会基于`Person` 扩展出两个实例对象
+
+```js
+class Person {
+  constructor(name, role) {
+    this.name = name;
+    this.role = role;
+  }
+  
+  greet() {
+    return this.getMessage('greeting');
+  }
+  getMessage(type) {
+    if (type === 'greeting') {
+      return `Hello, I'm ${this.name}!`;
+    }
+  }
+}
+```
+
+示例中，`greet`将会用调用`getMessage`用特定的参数，让我们来看下`monitor`方法怎么跟踪`getMessage`
+
+![monitor 示例](/img/console/monitor.gif "monitor 示例")
+
+```js
+  // 在控制台内使用：
+  var john = new Person('john');
+  var mary = new Person('mary');
+
+  monitor(john.getMessage);
+
+  john.greet();
+```
 
 
 
