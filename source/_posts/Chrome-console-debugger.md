@@ -136,6 +136,45 @@ categories: [读书笔记, 备忘]
 
 你(在代码中)打印了一个对象，然后(在代码中)修改了它，然后再将他打印出来 - 然后在console中查看，你就会看到第一条打印的记录(在进行修改前的记录) 和第二条打印的记录的值是一样的！
 
+## 根据调用堆栈自动缩进
+
+```js
+function log(message) {
+  console.log('  '.repeat(new Error().stack.match(/\n/g).length - 2) + message)
+}
+function foo() {
+  log('foo')
+  return bar() + bar();
+}
+function bar() {
+  log('bar')
+  return baz() + baz()
+}
+function baz() {
+  log('baz')
+  return 12;
+}
+// 运行
+foo();
+// 输出结果
+/*
+  foo
+    bar
+      baz
+      baz
+    bar
+      baz
+      baz
+  48
+*/
+```
+
+## 输出增加样式
+
+```js
+console.log('%c日志输出', 'color:green; font-size: 16px;')
+```
+
 # 快捷键
 
 ## 通过'h'来隐藏
@@ -353,7 +392,7 @@ console.clown({ message: 'hello!' })
 现在断点将仅在满足条件时暂停代码。
 ![pauseif 示例](/img/console/pauseif.gif "pauseif 示例")
 
-**高级进阶**
+## 高级进阶
 由于条件断点，您可以开始使用一种灵巧的技术
 
 * 每次应用程序到达该行时，提供的条件必须检查 - 即运行
@@ -363,6 +402,31 @@ console.clown({ message: 'hello!' })
 
 因此，不用在源代码的多个位置添加`console.log / console.table / console.time`等，而只需使用条件断点在`Sources`面板中“附加”它们。它们不会停止，但它们会运行，当你不再需要它们时，你在断点列表，你可以通过两次点击鼠标将它们全部删除。他们会像一堆忍者一样消失！
 ![debuggerconsole 示例](/img/console/debuggerconsole.gif "debuggerconsole 示例")
+
+## DOM断点
+
+某些脚本会更改DOM，但你不确定什么时间什么事件，这里可以添加DOM断点，可以侦听添加子元素，或者删除元素，或者修改属性
+![DOM breakpoint 示例](/img/console/breakpoint.png "breakpoint 示例")
+断点会被记录在面板`DOM Breakpoints`里面，在元素里面有小圆点标示。
+
+另外还有js版的DOM侦听，支持IE11以上浏览器
+
+```js
+const observer = new MutationObserver((mutationsList, obsercer) => {
+  console.log(mutationsList, obsercer)
+})
+const ul = document.querySelector('ul')
+observer.observe(ul, {
+  attributes: true,
+  childList: true,
+  subtree: true
+})
+```
+
+## XHR/fetch断点
+
+如果要捕获`ajax`请求，就要使用Sources面板中的`XHR/fetch breakpoints`，可以添加部分URL作为触发器，为空就是监听所有请求
+![XHR/fetch 示例](/img/console/xrhfetch.png "XHR/fetch 示例")
 
 # queryObjects 方法
 
@@ -432,8 +496,15 @@ class Person {
   john.greet();
 ```
 
+# monitorEvents
 
+我们可以使用 `monitorEvents` 监听元素的事件
 
+```js
+  // $0 参考文章前面说明
+  monitorEvents($0, 'click')
+  // 然后再点击元素时，控制台会打印点击事件的event事件对象
+```
 
 
 

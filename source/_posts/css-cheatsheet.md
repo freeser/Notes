@@ -24,6 +24,7 @@ categories: [代码片断]
 > 可设置文字被选择时的样式
 {% codeblock lang:css %}
 ::selection { background: #FE6E66;color: #FFF;}
+::-moz-selection { }
 {% endcodeblock %}
 
 ### image-set 
@@ -426,3 +427,29 @@ target.scrollIntoView({
 > 如果我们的网页已经通过CSS设置了`scroll-behavior:smooth`声明，则我们直接执行`target.scrollIntoView()`方法就会有平滑滚动，无需再额外设置`behavior`参数。
 
 [CSS scroll-behavior和JS scrollIntoView让页面滚动平滑](https://www.zhangxinxu.com/wordpress/2018/10/scroll-behavior-scrollintoview-%E5%B9%B3%E6%BB%91%E6%BB%9A%E5%8A%A8/)
+
+
+### 单位尺寸
+
+* vw (viewport width) - 浏览器窗口宽度的1%。
+* vh (viewport height) - 同上，只不过用来描述高度。
+* vmin and vmax 设置介于vh和vw之间的最大最小值。
+
+### @Supports
+
+检测某些设定是否被浏览器所支持，并非所有的浏览器都支持它，但是你仍然可以使用它作为基本的检测手段
+```css
+@supports (display: flex) {
+    div { display: flex; }
+}
+
+/*You can check prefixes*/
+@supports (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
+    section {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: flex;
+        float: none;
+    }
+}
+```
