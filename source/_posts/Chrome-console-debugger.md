@@ -172,6 +172,12 @@ foo();
 ## 输出增加样式
 
 ```js
+// %c 样式占位
+// %s 字体串占位
+// %d 表示数字
+// %i 表示整型数字
+// %o 表示DOM元素
+// %O 表示对象
 console.log('%c日志输出', 'color:green; font-size: 16px;')
 ```
 
@@ -253,6 +259,13 @@ console.log('%c日志输出', 'color:green; font-size: 16px;')
 你是否突然开始讨厌强光，并且不能忍受一直看着白光闪闪的屏幕呢？或者你一直都在黑暗的模式下工作，突然太阳出来了，照在你的 `DevTools` 上所以你什么都看不到？
 在`Commands`菜单中寻找与 `theme` 相关的选项，以实现在明亮&暗黑两种主题之间的切换。
 ![theme 示例](/img/console/theme.gif "theme 示例")
+
+## Esc
+
+打开控制台后，按`Esc`后出现另外的控制台，再次按[esc]隐藏它
+要查看完整列表，请单击放置控制台面板选项卡之前的菜单图标（⋮）。或者，您也可以使用“命令”菜单并键入“Drawer”：
+
+> 详情：`Animations`, `Changes`, `Console`, `Coverage`, `Network conditions`, `Performance monitor`, `Quick source`, `Remote devices`, `Rendering`, `Request blocking`, `Search`, `Sensors`, `What’s new`
 
 # Color picker
 
