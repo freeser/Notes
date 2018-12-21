@@ -520,9 +520,12 @@ class Person {
 ```
 
 
+# workspace
 
-
-
+1. 在`Chrome`里面编辑你的源文件，`Source --> Filesystem`，就可以在`Sources`面板中编辑`HTML`和`JavaScript`，然后`ctrl + s`保存到文件系统中。
+2. 工作区可以将您实时调试的样式保存到你的样式文件内。
+3. 如果要向现有选择器添加新样式，则很容易：只需在`Elements`面板的`Styles`部分中找到该选择器，然后开始编写css。但是如果还没有这样的选择器，则需要按下`+ New Style Rule`按钮。但是，当您使用工作区时，新样式规则的默认位置 - “inspector-stylesheet：1”位置 - 不是您希望添加的位置。在这种情况下，只需按住`+ New Style Rule`按钮，会列出所有css文件的选项。可以选择要保存到的文件！
+4. 在`workspace`内更改的css样式会立即被浏览器渲染的，不用刷新。
 
 参考：
 * [你不知道的Chrome调试工具技巧](https://juejin.im/post/5c09a80151882521c81168a2)
