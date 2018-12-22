@@ -527,5 +527,11 @@ class Person {
 3. 如果要向现有选择器添加新样式，则很容易：只需在`Elements`面板的`Styles`部分中找到该选择器，然后开始编写css。但是如果还没有这样的选择器，则需要按下`+ New Style Rule`按钮。但是，当您使用工作区时，新样式规则的默认位置 - “inspector-stylesheet：1”位置 - 不是您希望添加的位置。在这种情况下，只需按住`+ New Style Rule`按钮，会列出所有css文件的选项。可以选择要保存到的文件！
 4. 在`workspace`内更改的css样式会立即被浏览器渲染的，不用刷新。
 
+# Snippets
+
+1. 在`Chrome`里面增加代码片断，`Source --> Snippets`，增加一个常用代码片断，方便下次使用。可以使用右键`Run`或者`ctrl + enter`来运行
+2. 一旦设置了一组很棒的片段，您甚至不必访问`Sources`来运行它们。最快捷的方法是使用`Command Menu`（`ctrl + p`）。如果你输入`!`，您可以按名称选择一个片段：
+
+
 参考：
 * [你不知道的Chrome调试工具技巧](https://juejin.im/post/5c09a80151882521c81168a2)
