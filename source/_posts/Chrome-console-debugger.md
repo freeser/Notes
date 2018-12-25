@@ -532,6 +532,33 @@ class Person {
 1. 在`Chrome`里面增加代码片断，`Source --> Snippets`，增加一个常用代码片断，方便下次使用。可以使用右键`Run`或者`ctrl + enter`来运行
 2. 一旦设置了一组很棒的片段，您甚至不必访问`Sources`来运行它们。最快捷的方法是使用`Command Menu`（`ctrl + p`）。如果你输入`!`，您可以按名称选择一个片段：
 
+# network
+
+1. `View：`后面两个图标用途，第一个大列表模式，第二个，是否显示`OverView`时序预览图
+2. 请求列表`Initiator`可以查看调用堆栈，方便追踪XHR调用位置
+3. 过滤请求地址的时候，可以加列表列名称，如：`Method:GET`，`status-code:200`等，要查看更多的关键字列表，请在空输入上按`[ctrl] + [space]`（快捷键冲突请自行解决）
+4. 自主义请求列表列显示，要自定义显示哪些列，只需右键单击请求表标题上的任意位置
+
+# coverage
+
+要获得一个更好的摘要 - 以及冗余代码的详细信息，请使用`Coverage`面板。要打开它，请使用`Drawer`菜单，或者更快，使用`Command Menu`：
+`DevTools`的`Coverage`工具可以跟踪当前加载的JS和CSS文件的哪些行已执行过，并显示未使用字节的百分比。它还标记以绿色运行的线条和以红色运行的线条。
+![coverage 示例](/img/console/coverage.gif "coverage 示例")
+
+# changes
+
+在浏览器中进行设计，调整这些css值，使用代码进行评估 - 这既方便又有趣。但在某些时候，您可能希望将已更改的内容与最初加载的样式表进行比较。为此，请使用驻留在`DevTools`中的`Changes`工具。
+它不仅会向您展示使用像Git这样的源控制工具熟悉的差异形式的变化，还可以撤消它们。
+![changes 示例](/img/console/changes.gif "changes 示例")
+
+# live expressions
+
+`DevTools`在`Console`面板有一个非常漂亮的附加功能，这是一个名为`Live expression`的工具。只需按下眼睛符号，您就可以在那里定义任何`JavaScript`表达式。它会不断更新，所以表达的结果将永远执行着，您还可以同时定义多个：
+![expressions 示例](/img/console/expressions.gif "expressions 示例")
+
+# ctrl + F
+
+`elements, logs, sources & network`都支持搜索
 
 参考：
 * [你不知道的Chrome调试工具技巧](https://juejin.im/post/5c09a80151882521c81168a2)
