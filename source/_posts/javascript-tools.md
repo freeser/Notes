@@ -1320,6 +1320,12 @@ function ajax(options){
 ```
 [参考](https://blog.csdn.net/github_37533433/article/details/66471962)
 
+# 性能优化
+
+## createDocumentFragment
+
+一旦需要更新DOM,请考虑使用文档碎片来构建DOM结构，然后再将其添加到现存的文档中。
+[参考](https://www.cnblogs.com/liyunhua/p/4529086.html#_label11)
 
 # 鸣谢
 
