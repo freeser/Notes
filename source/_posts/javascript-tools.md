@@ -1327,6 +1327,97 @@ function ajax(options){
 一旦需要更新DOM,请考虑使用文档碎片来构建DOM结构，然后再将其添加到现存的文档中。
 [参考](https://www.cnblogs.com/liyunhua/p/4529086.html#_label11)
 
+# js获取位置与尺寸
+
+## 1、内高度、内宽度： 内边距 + 内容框
+
+```js
+element.clientWidth
+element.clientHeight
+```
+
+## 2、外高度，外宽度： 边框 + 内边距 + 内容框
+
+```js
+element.offsetWidth
+element.offsetHeight
+```
+
+## 3、上边框、左边框
+
+```js
+element.clientTop
+element.clientLeft
+```
+
+## 4、元素的大小及其相对于视口的位置
+
+```js
+element.getBoundingClientRect()
+//x\y:元素的左上角和父元素左上角的距离
+//width/height:边框 + 内边距 + 内容框
+//top:元素的上边界和父元素上边界的距离
+//left:元素的左边界和父元素左边界的距离
+//right:元素的右边界和父元素的左边界的距离
+//bottom:元素的下边界和父元素上边界的距离
+```
+
+## 5、上边偏移量，左边的偏移量
+
+```js
+element.offsetTop
+element.offsetLest
+```
+
+## 6、可视区域的大小
+
+```js
+document.documentElement.clientWidth
+document.documentElement.clientHeight
+```
+
+## 7、页面的实际大小
+
+```js
+document.documentElement.scrollWidth
+document.documentElement.scrollHeight
+```
+
+## 8、窗口左上角 与 屏幕左上角的 距离
+
+```js
+window.screenX
+window.screenY
+```
+
+## 9、屏幕宽高
+
+```js
+window.screen.width
+window.screen.height
+```
+
+## 10、屏幕可用宽高（去除任务栏）
+
+```js
+window.screen.availWidth
+window.screen.availHeight
+```
+
+## 11、窗口的内高度、内宽度（文档显示区域+滚动条）
+
+```js
+window.innerWidth
+window.innerHeight
+```
+
+## 12、窗口的外高度、外宽度
+
+```js
+window.outerWidth
+window.outerHeiht
+```
+
 # 鸣谢
 
 1、[打造自己的JavaScript武器库](https://juejin.im/post/5a091afe6fb9a044ff30f402)
