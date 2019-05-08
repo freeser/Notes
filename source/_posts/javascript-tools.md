@@ -1320,6 +1320,92 @@ function ajax(options){
 ```
 [参考](https://blog.csdn.net/github_37533433/article/details/66471962)
 
+
+## 计算字符串字符长度
+
+```js
+    const GetLen = function(str) {
+        let len = 0
+        for (let i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 127 || str.charCodeAt(i) == 94) {
+                 len += 2
+             } else {
+                 len ++
+             }
+         }
+        return len
+    }
+```
+
+## 计算两个坐标点偏转角度
+
+```js
+    // 计算偏转角度，0度为向方向，逆时针方向，未启用
+    function CalculateDirection(p1, p2) {
+       var dx, dy, da;
+       var m_dDirection = 0;
+       
+       dx = p2.x - p1.x;
+       dy = p2.y - p1.y;
+       
+       if (dx == 0) {
+           if (dy > 0) {
+               m_dDirection = 0;
+           } else {
+               m_dDirection = 180;
+           }
+       } else {
+           if (dx > 0) {
+               if (dy == 0) {
+                   m_dDirection = 90;
+               } else {
+                   if (dy > 0) {
+                       da = Math.abs(dx / dy);
+                       m_dDirection = Math.atan(da) * 180 / 3.14159265;
+                   } else {
+                       if (dy < 0) {
+                           da = Math.abs(dx / dy);
+                           m_dDirection = Math.atan(da) * 180 / 3.14159265;
+                           m_dDirection = 180 - m_dDirection;
+                       }
+                   }
+               }
+           } else {
+               if (dy == 0) {
+                   m_dDirection = 270;
+               } else {
+                   if (dy >= 0) {
+                       da = Math.abs(dx / dy);
+                       m_dDirection = Math.atan(da) * 180 / 3.14159265;
+                       m_dDirection = 360 - m_dDirection;
+                   } else {
+                       da = Math.abs(dx / dy);
+                       m_dDirection = Math.atan(da) * 180 / 3.14159265;
+                       m_dDirection = 180 + m_dDirection;
+                   }
+               }
+           }
+       }
+       return m_dDirection;
+    }
+```
+
+## 计算两个坐标点方向上的箭头坐标点
+
+```js
+    // 计算一条直线的箭头方向跟箭头三个坐标
+    function CalCoordinate(p1, p2, distance = 10, length = 6) {
+        let dx = p2.x - p1.x
+        let dy = p2.y - p1.y
+        let v_norm = Math.sqrt(dx ** 2 + dy ** 2)
+
+        let point_on_line = [p2.x - distance * dx / v_norm, p2.y - distance * dy / v_norm]
+        let point_below = [point_on_line[0] - length * -dy / v_norm, point_on_line[1] - length * dx / v_norm, ]
+        let point_above = [point_on_line[0] + length * -dy / v_norm, point_on_line[1] + length * dx / v_norm, ]
+        return [[p2.x, p2.y], point_below, point_above]
+    }
+```
+
 # 性能优化
 
 ## createDocumentFragment
