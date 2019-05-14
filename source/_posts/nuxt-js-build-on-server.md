@@ -15,7 +15,10 @@ categories: [收集整理, 文档留存]
 2. 第二步，选择要部署的文件：
 	* 方法一：拷贝如下目录到服务器要部署的目录：`.nuxt`、`package.json`、`nuxt.config.js` 文件(如果你部署一些`proxy`，则需要上传这个文件，个人建议把它传上去)
 	* 方法二：目录下`Git`克隆下你的项目，然后执行`npm run build`
-3. 第三步：后台启动实例：`npm run start &`
+3. 第三步：后台启动式实例：`npm run start &`
+4. 第三步：进程守护式启动： `nohup npm run start  >nohup.out &`
+5. 查看日志：`tailf nohup.out`
+6. 杀死已启动的守护进程（执行两次）：`kill -9 $(ps -ef|grep -v grep|grep nuxt|awk '{print $2}')`
 
 ## 查看启动实例
 
