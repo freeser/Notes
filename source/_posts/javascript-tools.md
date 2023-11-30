@@ -1504,6 +1504,38 @@ window.outerWidth
 window.outerHeiht
 ```
 
+## 13、Draggable 拖拽元素
+
+```js
+// 来源：https://www.redblobgames.com/making-of/draggable/
+function makeDraggable(state, el) {
+    function start(event) {
+        if (event.button !== 0) return; // left button only
+        event.stopPropagation(); // for nested draggables
+        let {x, y} = state.eventToCoordinates(event);
+        state.dragging = {dx: state.pos.x - x, dy: state.pos.y - y};
+        el.setPointerCapture(event.pointerId);
+    }
+
+    function end(event) {
+        state.dragging = null;
+    }
+
+    function move(event) {
+        if (!state.dragging) return;
+        event.stopPropagation(); // for nested draggables
+        let {x, y} = state.eventToCoordinates(event);
+        state.pos = {x: x + state.dragging.dx, y: y + state.dragging.dy};
+    }
+        
+    el.addEventListener('pointerdown', start);
+    el.addEventListener('pointerup', end);
+    el.addEventListener('pointercancel', end);
+    el.addEventListener('pointermove', move)
+    el.addEventListener('touchstart', (e) => e.preventDefault());
+}
+```
+
 # 鸣谢
 
 1、[打造自己的JavaScript武器库](https://juejin.im/post/5a091afe6fb9a044ff30f402)
